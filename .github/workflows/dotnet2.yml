@@ -23,6 +23,7 @@ jobs:
       run: dotnet build --no-restore ./practice/WebApplication1/
     - name: Test
       run: dotnet test --no-build --verbosity normal ./practice/WebApplication1
+    - uses: actions/checkout@v1
     - name: Zip Folder
       run: zip -r release.zip .
     - name: Release to Github

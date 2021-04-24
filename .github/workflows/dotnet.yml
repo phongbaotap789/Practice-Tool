@@ -20,6 +20,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./practice/WebApplication1/
     - name: Build
-      run: dotnet build --no-restore ./practice/WebApplication1
+      run: dotnet build --no-restore ./practice/WebApplication1/
     - name: Test
       run: dotnet test --no-build --verbosity normal ./practice/WebApplication1

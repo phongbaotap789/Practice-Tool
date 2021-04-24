@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore WebApplication1
+      run: dotnet restore ./C:\Users\Administrator\Desktop\practice\Practice-Tool\practice\WebApplication1
     - name: Build
-      run: dotnet build --no-restore ./WebApplication1
+      run: dotnet build --no-restore ./C:\Users\Administrator\Desktop\practice\Practice-Tool\practice\WebApplication1
     - name: Test
-      run: dotnet test --no-build --verbosity normal ./WebApplication1
+      run: dotnet test --no-build --verbosity normal ./C:\Users\Administrator\Desktop\practice\Practice-Tool\practice\WebApplication1

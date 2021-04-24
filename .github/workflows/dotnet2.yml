@@ -26,17 +26,7 @@ jobs:
         exclusions: '*.git* /*node_modules/* .editorconfig'
     - name: Build
       run: dotnet build --no-restore
- - name: Create Artifact Folder
-   run: New-Item -Path '${{ github.workspace }}' -Name "Artifacts" -ItemType "directory"
-   shell: powershell
- - name: Copy Scripts
-   run: Copy 'Scripts/' '${{ github.workspace }}/Artifacts/Scripts'
-   shell: powershell
- - name: Publish Artifact
-   uses: actions/upload-artifact@v2
-   with:
-     path: ${{ github.workspace }}/Artifacts
-     name: ${{ github.run_number }}
+ 
     - name: Test
       run: dotnet test --no-build --verbosity normal
       

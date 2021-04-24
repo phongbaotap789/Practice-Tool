@@ -23,12 +23,7 @@ jobs:
       run: dotnet build --no-restore ./practice/WebApplication1/
     - name: Test
       run: dotnet test --no-build --verbosity normal ./practice/WebApplication1
-    - name: Upload asset artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: assets
-        path: '~/**/*[assets].tar'
-    - name: Download asset artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: assets
+    - name: Zip Folder
+      run: zip -r release.zip .
+    - name: Release to Github
+      run: echo "Release"

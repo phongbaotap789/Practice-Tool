@@ -18,32 +18,19 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
+     run: dotnet restore ./practice/WebApplication1/
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore ./practice/WebApplication1/
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal ./practice/WebApplication1
       
-    - name: Checkout
-      uses: actions/checkout@v2
+    - name: Upload to Google Drive
+    uses: satackey/action-google-drive@v1
+    with:
+    skicka-tokencache-json: ${{ secrets.SKICKA_TOKENCACHE_JSON }}
+    upload-from: ./
+    upload-to: /path/to/upload
 
-    - name: Output branch name
-      id: name
-      run: echo "##[set-output name=branch;]${GITHUB_REF#refs/heads/}"
-
-    - name: Push
-      uses: satackey/push-prebuilt-action@v0.1
-      with:
-        push-branch: release-${{ steps.name.outputs.branch }}
-        docker-registry: docker.io
-        docker-user: satackey
-        docker-token: ${{ secrets.DOCKERHUB_TOKEN }}
-        docker-repotag: docker.io/satackey/action-google-drive:${{ github.sha }}
-
-    - name: Update latest tag
-      if: github.ref == 'refs/heads/master'
-      run: |
-        docker tag \
-          docker.io/satackey/action-google-drive:${{ github.sha }} \
-          docker.io/satackey/action-google-drive:latest
-        docker push docker.io/satackey/action-google-drive:latest
+    # For those who set up Google Drive API client ID and secret themselves
+    google-client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
+    google-client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
